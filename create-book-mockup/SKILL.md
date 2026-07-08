@@ -1,5 +1,5 @@
 ---
-name: book-mockup
+name: create-book-mockup
 description: Generate photo-realistic book mockup images using the internal `image_generator` tool. Use this whenever you want to visualize, preview, or render a book cover — including 3D mockups, scene renders, flat lays, or any realistic book presentation.
 ---
 

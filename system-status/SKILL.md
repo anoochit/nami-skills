@@ -1,40 +1,41 @@
 ---
 name: system-status
-description: Retrieve and report real-time system performance data including CPU usage, memory availability, and disk status. Use this skill whenever the user asks about system health, machine performance, or resource usage — even if they say "how are you running?", "is the server okay?", "what's the CPU at?", "check memory", or "am I running out of disk space."
+description: Retrieve and report real-time system performance data including CPU usage, memory availability, and disk status. Use this skill whenever the user asks about system health, machine performance, or resource usage — even if they say "how are you running?", "is the server okay?", "what's the CPU at?", "check memory", "am I running out of disk space", or use the "/status" command.
 ---
 
-# System Status
+# 🖥️ System Status Skill
 
-## Overview
+This skill retrieves real-time telemetry from the host machine using standard command-line tools and presents it as a premium, highly scannable status dashboard.
 
-This skill retrieves real-time telemetry from the host machine and presents it clearly. Use the `get_system_status` tool to gather CPU load, memory usage, and storage capacity, then report the results in a readable format.
+## Instructions
 
-## Guidelines
+### 1. Gather Telemetry
+Execute the following non-destructive shell commands via your command execution capability to collect host system metrics:
 
-- **Be precise**: Report percentages and byte counts converted to GB/MB for readability.
-- **Contextual analysis**: If CPU or memory usage is high (>80%), briefly note it as a potential factor in slower response times.
-- **Privacy**: Do not report specific process names or user paths unless the user is explicitly troubleshooting a specific issue.
-- **Formatting**: Use a table for metric summaries so data is easy to scan at a glance.
+*   **CPU Utilization & Load:** `top -bn1 | grep "Cpu(s)"` or `cat /proc/loadavg`
+*   **Memory Footprint:** `free -h` or `cat /proc/meminfo`
+*   **Disk Storage:** `df -h /`
+*   **Operating System details:** `uname -a` or `cat /etc/os-release`
+*   **Developer Toolchains (Versions):** Verify versions of key runtimes such as `cargo --version`, `python3 --version`, `node --version`, and `git --version`.
 
-## Output Format
+### 2. Evaluate & Categorize Resource Health
+Analyze the parsed telemetry to assign appropriate status thresholds:
+*   🟢 **Normal (0% - 69%):** Everything is operating efficiently.
+*   🟡 **Warning (70% - 85%):** High resource consumption. Explain possible causes.
+*   🔴 **Critical (86% - 100%):** Severe bottlenecks detected. Flag immediately and suggest mitigation actions (e.g., clearing caches, terminating runaway processes).
 
-Present results in a table like this:
+### 3. Generate a Premium Visual Status Table
+Organize the metrics in an elegant, structured markdown table with status emojis and progress bars:
 
-| Metric | Value | Status |
-|---|---|---|
-| CPU Usage | 12% | ✅ Normal |
-| Memory | 16 GB free / 32 GB total | ✅ Normal |
-| Disk | 70% free | ✅ Normal |
+| Metric | Value / Usage | Status | Health Bar |
+| :--- | :--- | :---: | :--- |
+| **CPU Load** | `12.4%` (Load: 0.45) | 🟢 Normal | `██░░░░░░░░ 12%` |
+| **Memory** | `4.2 GB / 16.0 GB` | 🟢 Normal | `████░░░░░░ 26%` |
+| **Disk Space** | `85.2 GB / 256.0 GB` | 🟢 Normal | `███░░░░░░░ 33%` |
 
-Add a one-line health summary below the table (e.g., "System is healthy with no resource pressure detected."). If any metric is above 80% utilization, flag it with ⚠️ and add a brief note.
-
-## Examples
-
-**User:** "How is the server doing?"
-**Response:** *(Run `get_system_status`, then)* "The system is healthy. CPU is at 12%, 16 GB of 32 GB RAM is free, and disk is 70% free."
-
-**User:** "Machine stats please."
-**Response:** *(Provide the metrics table above with current values.)*
-
-**User:** "Is the server slow right now?"
-**Response:** *(If CPU >80%)* "CPU usage is elevated at 87%, which may be contributing to slower response times. Memory and disk are both healthy."
+### 4. Provide a Consolidated Health Summary
+Under the table, include:
+1.  **Telemetry Insights:** A 1-2 sentence summary of overall host health.
+2.  **Toolchain Versions:** A compact sub-section highlighting available toolchain versions for developer convenience.
+    > [!NOTE]
+    > **Runtimes:** Rust `1.80.1` | Python `3.11.2` | Node.js `20.9.0`
