@@ -16,7 +16,7 @@ Execute the following non-destructive shell commands via your command execution 
 *   **Memory Footprint:** `free -h` or `cat /proc/meminfo`
 *   **Disk Storage:** `df -h /`
 *   **Operating System details:** `uname -a` or `cat /etc/os-release`
-*   **Developer Toolchains (Versions):** Verify versions of key runtimes such as `cargo --version`, `python3 --version`, `node --version`, and `git --version`.
+*   **Developer Toolchains (Versions):** Verify versions of key runtimes such as `cargo --version`, `python --version`, `node --version`, and `git --version`.
 
 ### 2. Evaluate & Categorize Resource Health
 Analyze the parsed telemetry to assign appropriate status thresholds:
