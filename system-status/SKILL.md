@@ -29,13 +29,12 @@ Organize the metrics in an elegant, structured markdown table with status emojis
 
 | Metric | Value / Usage | Status | Health Bar |
 | :--- | :--- | :---: | :--- |
-| **CPU Load** | `12.4%` (Load: 0.45) | 🟢 Normal | `██░░░░░░░░ 12%` |
-| **Memory** | `4.2 GB / 16.0 GB` | 🟢 Normal | `████░░░░░░ 26%` |
-| **Disk Space** | `85.2 GB / 256.0 GB` | 🟢 Normal | `███░░░░░░░ 33%` |
+| **CPU Load** | 12.4% (Load: 0.45) | 🟢 Normal | ██░░░░░░░░ 12% |
+| **Memory** | 4.2 GB / 16.0 GB | 🟢 Normal | ████░░░░░░ 26% |
+| **Disk Space** | 85.2 GB / 256.0 GB | 🟢 Normal | ███░░░░░░░ 33% |
 
 ### 4. Provide a Consolidated Health Summary
 Under the table, include:
 1.  **Telemetry Insights:** A 1-2 sentence summary of overall host health.
 2.  **Toolchain Versions:** A compact sub-section highlighting available toolchain versions for developer convenience.
-    > [!NOTE]
     > **Runtimes:** Rust `1.80.1` | Python `3.11.2` | Node.js `20.9.0`
